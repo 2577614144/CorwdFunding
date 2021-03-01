@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置SqlSessionFactoryBean整合MyBatis -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定MyBatis全局配置文件位置 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 指定Mapper.xml配置文件位置 -->
+        <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
+        <!-- 装配数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置分页插件 -->
+        <property name="plugins">
+            <bean class="com.github.pagehelper.PageInterceptor">
+                <property name="properties">
+                    <!--
+                        配置数据库方言,告诉PageHelper当前使用的数据库,设置数据库类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库
+                        配置页码的合理化修正,在1~总页数之间修正页码
+                    -->
+                    <value>
+                        helperDialect=mysql
+                        reasonable=true
+                    </value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 配置MapperScannerConfigurer来扫描Mapper接口所在的包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.atguigu.crowd.mapper"/>
+    </bean>
+</beans>
