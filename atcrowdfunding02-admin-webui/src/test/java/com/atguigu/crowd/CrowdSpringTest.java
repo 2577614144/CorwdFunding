@@ -2,6 +2,7 @@ package com.atguigu.crowd;
 
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.mapper.AdminMapper;
+import com.atguigu.crowd.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.UUID;
 
 /**
  * @Author: lipine
@@ -24,7 +26,7 @@ import java.sql.SQLException;
 // 指定 Spring 给 Junit 提供的运行器类
 @RunWith(SpringJUnit4ClassRunner.class)
 // 加载 Spring 配置文件的注解
-@ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml"})
+@ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml","classpath:spring-persist-tx.xml"})
 public class CrowdSpringTest {
 
     Logger logger = LoggerFactory.getLogger(CrowdSpringTest.class);
@@ -42,6 +44,9 @@ public class CrowdSpringTest {
 
     @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    private AdminService adminService;
     @Test
     public void testAdminMapperAutowired() {
         Admin admin = adminMapper.selectByPrimaryKey(1);
@@ -52,5 +57,12 @@ public class CrowdSpringTest {
         logger.warn("============warn=============");
         logger.info("============info=============");
         logger.debug("============debug=============");
+    }
+
+    @Test
+    public void testTx() {
+        Admin admin  = new Admin(null, UUID.randomUUID().toString(),"123456","李四","lisi@163.com",null);
+        adminService.saveAdmin(admin);
+//
     }
 }
