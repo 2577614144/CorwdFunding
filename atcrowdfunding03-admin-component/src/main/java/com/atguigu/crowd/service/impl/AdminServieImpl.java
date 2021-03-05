@@ -1,10 +1,13 @@
 package com.atguigu.crowd.service.impl;
 
 import com.atguigu.crowd.entity.Admin;
+import com.atguigu.crowd.entity.AdminExample;
 import com.atguigu.crowd.mapper.AdminMapper;
 import com.atguigu.crowd.service.api.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: lipine
@@ -22,5 +25,10 @@ public class AdminServieImpl implements AdminService {
         adminMapper.insert(admin);
         //为了测试声明式事务是否可以正常回滚
         //throw  new RuntimeException();
+    }
+
+    @Override
+    public List<Admin> getAll() {
+        return adminMapper.selectByExample(new AdminExample());
     }
 }

@@ -2,6 +2,8 @@ package com.atguigu.crowd.service.api;
 
 import com.atguigu.crowd.entity.Admin;
 
+import java.util.List;
+
 /**
  * @Author: lipine
  * @Date: 2021/3/4 11:20
@@ -11,4 +13,6 @@ import com.atguigu.crowd.entity.Admin;
 public interface AdminService {
 
     void saveAdmin(Admin admin);
+
+    List<Admin> getAll();
 }

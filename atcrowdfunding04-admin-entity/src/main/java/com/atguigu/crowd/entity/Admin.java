@@ -13,6 +13,9 @@ public class Admin {
 
     private String createTime;
 
+    public Admin() {
+    }
+
     public Admin(Integer id, String loginAcct, String userPswd, String userName, String email, String createTime) {
         this.id = id;
         this.loginAcct = loginAcct;
