@@ -37,10 +37,10 @@ public class TestHandler  {
         logger.info("judgeResult="+judgeResult);
         List<Admin> adminList = adminService.getAll();
         modelMap.addAttribute("adminList",adminList);
-//        System.out.println(10/0);
-        String a = null;
+        System.out.println(10/0);
+//        String a = null;
+//        System.out.println(a.length());
 
-        System.out.println(a.length());
         return "target";
     }
 
@@ -54,9 +54,10 @@ public class TestHandler  {
 
         logger.info(student.toString());
 
-        String a = null;
-
-        System.out.println(a.length());
+//        String a = null;
+//
+//        System.out.println(a.length());
+        System.out.println(10/0);
         // 将“查询”到的Student对象封装到ResultEntity中返回
         ResultEntity<Student> resultEntity = ResultEntity.successWithData(student);
 
