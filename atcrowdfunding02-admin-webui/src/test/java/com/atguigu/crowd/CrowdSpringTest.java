@@ -65,4 +65,11 @@ public class CrowdSpringTest {
         adminService.saveAdmin(admin);
 //
     }
+
+    @Test
+    public void testSaveAdminMulti() {
+        for (int i = 0; i < 352; i++) {
+            adminMapper.insert(new Admin(null, "loginAcct" + i, "userPswd" + i, "userName" + i, "email" + i + "@qq.com", null));
+        }
+    }
 }
