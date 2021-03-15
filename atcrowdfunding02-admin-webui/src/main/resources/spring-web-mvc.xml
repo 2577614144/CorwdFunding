@@ -44,4 +44,18 @@
     <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/main/page.html"  view-name="admin-main"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- mvc:mapping 配置要拦截的资源 -->
+            <!-- /*对应一层路径，比如：/aaa -->
+            <!-- /**对应多层路径，比如：/aaa/bbb 或/aaa/bbb/ccc 或/aaa/bbb/ccc/ddd -->
+            <mvc:mapping path="/**"/>
+            <!-- mvc:exclude-mapping 配置不拦截的资源 -->
+            <mvc:exclude-mapping path="/admin/to/login/page.html"/>
+            <mvc:exclude-mapping path="/admin/do/login.html"/>
+            <mvc:exclude-mapping path="/admin/do/logout.html"/>
+            <!-- 配置拦截器类 -->
+            <bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

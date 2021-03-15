@@ -85,10 +85,22 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_admin
     where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--通过关键字查询数据-->
+  <select id="selectAdminListByKeyword" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_admin
+    where login_acct like CONCAT("%",#{keyword},"%")
+    or
+    user_name like CONCAT("%",#{keyword},"%")
+    or
+    email like CONCAT("%",#{keyword},"%")
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_admin
@@ -101,10 +113,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.atguigu.crowd.entity.Admin">
-    insert into t_admin (id, login_acct, user_pswd, 
+    insert into t_admin (id, login_acct, user_pswd,
       user_name, email, create_time
       )
-    values (#{id,jdbcType=INTEGER}, #{loginAcct,jdbcType=VARCHAR}, #{userPswd,jdbcType=CHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{loginAcct,jdbcType=VARCHAR}, #{userPswd,jdbcType=CHAR},
       #{userName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}
       )
   </insert>
