@@ -3,12 +3,15 @@ package com.atguigu.crowd.service.impl;
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.AdminExample;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.mapper.AdminMapper;
 import com.atguigu.crowd.service.api.AdminService;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,8 @@ import java.util.Objects;
  */
 @Service
 public class AdminServieImpl implements AdminService {
+
+    private  Logger logger = LoggerFactory.getLogger(AdminServieImpl.class);
     @Autowired
     AdminMapper adminMapper;
 
@@ -47,11 +52,10 @@ public class AdminServieImpl implements AdminService {
             adminMapper.insert(admin);
         } catch (Exception e) {
             e.printStackTrace();
-
-//            logger.info("异常全类名="+e.getClass().getName());
-//            if(e instanceof DuplicateKeyException) {
-//                throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
-//            }
+            logger.info("异常全类名="+e.getClass().getName());
+            if(e instanceof DuplicateKeyException) {
+                throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
         }
     }
 

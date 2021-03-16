@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,18 @@ import com.google.gson.Gson;
   */
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+	@ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+	public ModelAndView resolveAcctAlreadyInUseException(
+			LoginAcctAlreadyInUseException exception,
+			HttpServletRequest request,
+			HttpServletResponse response
+	) throws IOException {
+
+		String viewName = "admin-add";
+
+		return commonResolve(viewName, exception, request, response);
+	}
 
 
 	@ExceptionHandler(value = LoginFailedException.class)
