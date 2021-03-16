@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,23 @@ import com.google.gson.Gson;
 @ControllerAdvice
 public class CrowdExceptionResolver {
 
+	/**
+	 * 已使用账号更新错误
+	 */
+	@ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
+	public ModelAndView resolveAcctAlreadyInUseForUpdateException(
+			LoginAcctAlreadyInUseForUpdateException exception,
+			HttpServletRequest request,
+			HttpServletResponse response
+	) throws IOException {
+
+		String viewName = "system-error";
+
+		return commonResolve(viewName, exception, request, response);
+	}
+	/**
+	 *  账号已使用错误
+	 */
 	@ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
 	public ModelAndView resolveAcctAlreadyInUseException(
 			LoginAcctAlreadyInUseException exception,
