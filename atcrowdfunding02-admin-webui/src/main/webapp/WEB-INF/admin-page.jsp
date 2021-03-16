@@ -71,10 +71,14 @@
 							style="float: right; margin-left: 10px;">
 							<i class=" glyphicon glyphicon-remove"></i> 删除
 						</button>
+						<!--
+						旧代码
 						<button type="button" class="btn btn-primary"
 							style="float: right;" onclick="window.location.href='add.html'">
 							<i class="glyphicon glyphicon-plus"></i> 新增
-						</button>
+						</button> -->
+						<!-- 新代码 -->
+						<a style="float: right;" href="admin/to/add/page.html" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						<br>
 						<hr style="clear: both;">
 						<div class="table-responsive">

@@ -25,6 +25,16 @@ public class AdminHandler {
     @Autowired
     private AdminService adminService;
 
+    @RequestMapping("/admin/save.html")
+    public String  save(Admin admin){
+        adminService.saveAdmin(admin);
+        /**
+         * 添加?pageNum="+Integer.MAX_VALUE 为了默认定位到最后一页
+         * 也可以修改sql为desc排序 return “redirect:/admin/get/page.html”
+         */
+        return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
+    }
+
 
     @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
     public String remove(
