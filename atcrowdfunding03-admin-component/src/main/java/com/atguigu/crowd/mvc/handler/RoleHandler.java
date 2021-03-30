@@ -6,7 +6,6 @@ import com.atguigu.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,5 +37,14 @@ public class RoleHandler {
         PageInfo<Role> pageInfo = roleService.getPageInfo(keyword,pageNum,pageSize);
         // 封装到 ResultEntity 对象中返回（如果上面的操作抛出异常，交给异常映射机制处理）
         return ResultEntity.successWithData(pageInfo);
+    }
+
+    @ResponseBody
+    @RequestMapping("/role/save.json")
+    public ResultEntity<String> saveRole(Role role) {
+
+        roleService.saveRole(role);
+
+        return ResultEntity.successWithoutData();
     }
 }
