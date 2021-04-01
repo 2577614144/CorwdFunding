@@ -333,6 +333,6 @@
 
 <%@include file="/WEB-INF/modal-role-add.jsp" %>
 <%@include file="/WEB-INF/modal-role-edit.jsp" %>
-<%--<%@include file="/WEB-INF/modal-role-confirm.jsp" %>--%>
+<%@include file="/WEB-INF/modal-role-confirm.jsp" %>
 </body>
 </html>
